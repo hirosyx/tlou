@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Last of Us | Personagens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #f5f5f5;
+            --text-muted: #888;
+            --accent: #d4a017;
+            --border: #222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a.active {
+            color: var(--accent);
+        }
+
+        /* TRAILER */
+        .trailer-section {
+            margin-bottom: 40px;
+        }
+
+        .trailer-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .trailer-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .trailer-container iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            display: block;
+        }
+
+        .trailer-title {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+        }
+
+        .tab-radio {
+            display: none;
+        }
+
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-label {
+            padding: 12px 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-label:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        #tab-part1:checked ~ .tabs-container label[for="tab-part1"],
+        #tab-part2:checked ~ .tabs-container label[for="tab-part2"] {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        .search-container {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(212, 160, 23, 0.2);
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .part1-content {
+            display: none;
+        }
+
+        .part2-content {
+            display: none;
+        }
+
+        #tab-part1:checked ~ .part1-content {
+            display: block;
+        }
+
+        #tab-part2:checked ~ .part2-content {
+            display: block;
+        }
+
+        .characters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+            padding-bottom: 60px;
+        }
+
+        .character-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .character-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .character-foto {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .character-foto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .character-card:hover .character-foto img {
+            transform: scale(1.05);
+        }
+
+        .character-foto::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(to top, var(--bg-card), transparent);
+        }
+
+        .character-info {
+            padding: 20px;
+        }
+
+        .character-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .character-alias {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .character-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .character-status {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 4px 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border-radius: 3px;
+        }
+
+        .status-alive {
+            background: rgba(45, 90, 39, 0.4);
+            color: #5cb85c;
+        }
+
+        .status-deceased {
+            background: rgba(196, 30, 58, 0.4);
+            color: #e74c3c;
+        }
+
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .trailer-container {
+                border-radius: 0;
+            }
+            
+            .trailer-container::before {
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">THE LAST <span>OF US</span></div>
+                <nav>
+                    <a href="index.html" class="active">Personagens</a>
+                    <a href="historia.html">História</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- TRAILER -->
+        <section class="trailer-section">
+            <p class="trailer-title">Assista ao Trailer</p>
+            <div class="trailer-container">
+                <iframe 
+                    src="https://www.youtube.com/watch?v=W01L70IGBgE" 
+                    title="The Last of Us Part I - Trailer" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <section class="hero">
+            <h1>Personagens <span>Icônicos</span></h1>
+            <p>Conheça os personagens de The Last of Us Part I e Part II</p>
+        </section>
+
+        <input type="radio" id="tab-part1" name="tab" class="tab-radio" checked>
+        <input type="radio" id="tab-part2" name="tab" class="tab-radio">
+
+        <div class="tabs-container">
+            <label for="tab-part1" class="tab-label">Part I</label>
+            <label for="tab-part2" class="tab-label">Part II</label>
+        </div>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" placeholder="Buscar personagem...">
+                <span class="search-icon">🔍</span>
+            </div>
+        </div>
+
+        <!-- PART I -->
+        <div class="part1-content">
+            <div class="characters-grid">
+                <div class="character-card">
+                    <div class="character-foto">
+                        <img src="imagens/joel 1.png" alt="Joel Miller">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Joel Miller</h3>
+                        <p class="character-alias">"O Smuggler"</p>
+                        <p class="character-desc">Sobrevivente endurecido. Após perder sua filha Sarah, faria qualquer coisa para proteger Ellie.</p>
+                        <span class="character-status status-deceased">● FALECIDO</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-foto">
+                        <img src="imagens/ellie 1.png" alt="Ellie Williams">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Ellie Williams</h3>
+                        <p class="character-alias">"A Garota Imune"</p>
+                        <p class="character-desc">Adolescente imune ao Cordyceps. Esperta e determinada, carrega o peso de um mundo destruído.</p>
+                        <span class="character-status status-alive">● VIVA</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-foto">
+                        <img src="imagens/tess.png" alt="Tess">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Tess</h3>
+                        <p class="character-alias">"A Parceira"</p>
+                        <p class="character-desc">Parceira de Joel, sobrevivente pragmática e feroz. Forte e determinada.</p>
+                        <span class="character-status status-deceased">● FALECIDA</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-foto">
+                        <img src="imagens/tommy 1.png" alt="Tommy Miller">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Tommy Miller</h3>
+                        <p class="character-alias">"O Irmão"</p>
+                        <p class="character-desc">Irmão de Joel, ex-Firefly. Idealista, busca construir um futuro melhor em Jackson.</p>
+                        <span class="character-status status-alive">● VIVO</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-foto">
+                        <img src="imagens/sarah.png" alt="Sarah Miller">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Sarah Miller</h3>
+                        <p class="character-alias">"A Filha"</p>
+                        <p class="character-desc">Filha de Joel. Sua morte no início do jogo define toda a jornada do personagem.</p>
+                        <span class="character-status status-deceased">● FALECIDA</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-foto">
+                        <img src="imagens/marlene.png" alt="Marlene">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Marlene</h3>
+                        <p class="character-alias">"Líder dos Fireflies"</p>
+                        <p class="character-desc">Líder da oposição Firefly. Determinada a encontrar uma cura para a pandemia.</p>
+                        <span class="character-status status-deceased">● FALECIDA</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-foto">
+                        <img src="imagens/bill.png" alt="Bill">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Bill</h3>
+                        <p class="character-alias">"O Sobrevivente"</p>
+                        <p class="character-desc">Sobrevivente paranoico. Rude por fora, mas com um coração que se revela.</p>
+                        <span class="character-status status-deceased">● FALECIDO</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART II -->
+        <div class="part2-content">
+            <div class="characters-grid">
+                <div class="character-card">
+                    <div class="character-foto">
+                        <img src="imagens/abby 1.png" alt="Abby Anderson">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Abby Anderson</h3>
+                        <p class="character-alias">"A Vingança"</p>
+                        <p class="character-desc">Ex-soldado da WLF, obcecada por vingança contra Joel.</p>
+                        <span class="character-status status-alive">● VIVA</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-foto">
+                        <img src="imagens/dina.png" alt="Dina">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Dina</h3>
+                        <p class="character-alias">"A Companheira"</p>
+                        <p class="character-desc">Parceira de Ellie em Jackson. Forte e determinada.</p>
+                        <span class="character-status status-alive">● VIVA</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-foto">
+                        <img src="imagens/lev.png" alt="Lev">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Lev</h3>
+                        <p class="character-alias">"O Fugitivo"</p>
+                        <p class="character-desc">Ex-Seraphite. Sua jornada de auto-descoberta é central na sequência.</p>
+                        <span class="character-status status-alive">● VIVO</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-foto">
+                        <img src="imagens/owen.png" alt="Owen">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Owen</h3>
+                        <p class="character-alias">"O Idealista"</p>
+                        <p class="character-desc">Ex-soldado da WLF e ex-namorado de Abby.</p>
+                        <span class="character-status status-deceased">● FALECIDO</span>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="character-foto">
+                        <img src="imagens/mel.png" alt="Mel">
+                    </div>
+                    <div class="character-info">
+                        <h3 class="character-name">Mel</h3>
+                        <p class="character-alias">"A Médica"</p>
+                        <p class="character-desc">Sold

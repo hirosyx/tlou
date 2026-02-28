@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Last of Us | História</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-main: #f5f5f5;
+            --text-muted: #888;
+            --accent: #d4a017;
+            --border: #222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* HEADER */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a.active {
+            color: var(--accent);
+        }
+
+        /* HERO */
+        .hero {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ESCONDER RADIO BUTTONS */
+        .tab-radio {
+            display: none;
+        }
+
+        /* BOTÕES DAS ABAS */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-label {
+            padding: 12px 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-label:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        #tab-part1:checked ~ .tabs-container label[for="tab-part1"],
+        #tab-part2:checked ~ .tabs-container label[for="tab-part2"] {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg-dark);
+        }
+
+        /* CONTEÚDO */
+        .story-content {
+            display: none;
+            padding-bottom: 80px;
+        }
+
+        #tab-part1:checked ~ .story-part1 {
+            display: block;
+        }
+
+        #tab-part2:checked ~ .story-part2 {
+            display: block;
+        }
+
+        /* SECTIONS */
+        .story-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .story-section h2 {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .story-section h3 {
+            font-size: 1.1rem;
+            margin: 20px 0 10px;
+            color: var(--text-main);
+        }
+
+        .story-section p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .story-section ul {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .story-section li {
+            color: var(--text-muted);
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .story-section li::before {
+            content: '•';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+
+        /* INFO BOX */
+        .info-box {
+            background: rgba(212, 160, 23, 0.1);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .info-box h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            margin: 0;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">THE LAST <span>OF US</span></div>
+                <nav>
+                    <a href="index.html">Personagens</a>
+                    <a href="historia.html" class="active">História</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>A <span>História</span></h1>
+            <p>Explore a épica narrativa de The Last of Us, uma história de sobrevivência, amor e perda em um mundo pós-apocalíptico.</p>
+        </section>
+
+        <!-- RADIO BUTTONS -->
+        <input type="radio" id="tab-part1" name="tab" class="tab-radio" checked>
+        <input type="radio" id="tab-part2" name="tab" class="tab-radio">
+
+        <!-- BOTÕES DAS ABAS -->
+        <div class="tabs-container">
+            <label for="tab-part1" class="tab-label">Part I</label>
+            <label for="tab-part2" class="tab-label">Part II</label>
+        </div>
+
+        <!-- PART I -->
+        <div class="story-content story-part1">
+            <div class="story-section">
+                <h2>The Last of Us Part I (2013)</h2>
+                
+                <h3>📅 O Surt</h3>
+                <p>
+                    Em 2033, um fungo cordyceps mutado se espalha pelo mundo, infectando a população humana e transformando pessoas em criaturas canibais violentas. O cenário começa no Texas, onde Joel Miller, um pai viúvo, tenta escapar do caos com sua filha Sarah e seu irmão Tommy.
+                </p>
+                <p>
+                    Durante a fuga, eles são interceptados por soldados. Sarah é baleada e morre nos braços de Joel, estabelecendo o trauma central que definirá suas ações ao longo de toda a história. Vinte anos depois, o mundo está em ruínas.
+                </p>
+
+                <div class="info-box">
+                    <h4>🎮 Data de Lançamento</h4>
+                    <p>14 de junho de 2013 para PS3 | Remake em setembro de 2022 para PS5 e PC</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🤝 A Missão</h3>
+                <p>
+                    Joel trabalha como contrabandista em Boston, agora sob o controle de uma autoridade militar chamada Quarantine Zone. Ele se搭档 com Tess, uma sobrevivente pragmática e feroz. Juntos, eles aceitam uma missão para entregar uma adolescente chamada Ellie a um grupo chamado Fireflies.
+                </p>
+                <p>
+                    Os Fireflies são uma resistência que busca uma cura para a pandemia. O líder do grupo, Marlene, oferece suprimentos valiosos em troca de Ellie. O que Joel e Tess não sabem inicialmente é que Ellie é imune à infecção.
+                </p>
+            </div>
+
+            <div class="story-section">
+                <h3>🗺️ A Jornada</h3>
+                <p>
+                    A jornada começa em Boston, mas o trio precisa atravessar o país até Salt Lake City. Tess é infectada durante um confronto e sacrifica-se para que Joel e Ellie possam continuar. Sozinhos, Joel e Ellie desenvolvem um vínculo paterno-filial enquanto enfrentam:
+                </p>
+                <ul>
+                    <li>Infetados (corredores, estaladores, reguladores)</li>
+                    <li>Bandidos e sobreviventes hostis</li>
+                    <li>Comunidades isoladas e desconfiadas</li>
+                    <li>Bill, um sobrevivente paranoico que os ajuda</li>
+                    <li>Henry e Sam, dois irmãos em fuga</li>
+                    <li>Tommy, que construiu uma comunidade em Jackson</li>
+                </ul>
+            </div>
+
+            <div class="story-section">
+                <h3>🏥 O Hospital</h3>
+                <p>
+                    Eles finalmente chegam ao hospital dos Fireflies em Salt Lake City, mas descobrem que os Fireflies precisam extrair a medula de Ellie para criar uma vacina. O procedimento mataria Ellie. Marlene, embora relutante, autoriza a cirurgia.
+                </p>
+                <p>
+                    Joel, traumatizado pela morte de Sarah, não aceita perder outra filha. Ele massacre os Fireflies, incluindo Marlene, e rescata Ellie. Quando ela acorda, ele mente dizendo que os Fireflies encontraram outras crianças imunes e desistiram da pesquisa.
+                </p>
+
+                <div class="info-box">
+                    <h4>💔 O Final</h4>
+                    <p>Joel e Ellie retornam à comunidade de Tommy em Jackson. Ellie questiona Joel sobre sua história, e ele promete contar a verdade "algum dia". A cena final mostra Joel tocando violão para Ellie, sugerindo uma nova esperança, mas com a dúvida persistente sobre suas escolhas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PART II -->
+        <div class="story-content story-part2">
+            <div class="story-section">
+                <h2>The Last of Us Part II (2020)</h2>
+                
+                <h3>📅 Quatro Anos Depois</h3>
+                <p>
+                    A história começa quatro anos após os eventos do primeiro jogo. Joel e Ellie agora vivem em Jackson, uma comunidade próspera no Wyoming. Ellie tem 19 anos e desenvolveu uma vida quase normal, com amigos, um interesse romântico chamado Dina, e uma família adotiva com Joel e Tommy.
+                </p>
+                <p>
+                    Durante uma patrulha, Joel e Tommy encontram um grupo de sobreviventes. Uma delas, Abby, reconhece Joel e o mata brutalmente à vista de Ellie. Este evento traumático define toda a narrativa de vingança que se segue.
+                </p>
+
+                <div class="info-box">
+                    <h4>🎮 Data de Lançamento</h4>
+                    <p>19 de junho de 2020 para PS4 | Remake em janeiro de 2024 para PS5</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>😠 A Vingança de Ellie</h3>
+                <p>
+                    Ellie descobre que Abby faz parte do WLF (Washington Liberation Front), uma milícia que controla Seattle. Ela e Dina partem para a cidade em busca de vingança. Ao chegarem, descobrem que Abby está sendo procurada tanto pelo WLF quanto pelos Seraphites, uma seita religiosa.
+                </p>
+                <p>
+                    Durante sua jornada, Ellie e Dina encontram e matam vários aliados de Abby, incluindo Nora, Mel e Manny. Em um momento crucial, Ellie quase mata uma grávida Mel, o que a faz questionar sua própria humanidade e a natureza cíclica da violência.
+                </p>
+            </div>
+
+            <div class="story-section">
+                <h3>🔄 O Ponto de Vista de Abby</h3>
+                <p>
+                    O jogo muda radicalmente ao revelar o passado de Abby. Descobrimos que ela era filha de um dos médicos do hospital que Joel matou. Seu pai, Jerry, era um dos poucos que poderiam criar uma cura, e sua morte eliminou a esperança de humanidade.
+                </p>
+                <p>
+                    Abby passou quatro anos treinando para se tornar uma guerreira formidável. Sua motivação para matar Joel não era maldade, mas sim vingança por seu pai. O jogo mostra suas lutas internas e como ela também foi consumida pela violência.
+                </p>
+            </div>
+
+            <div class="story-section">
+                <h3>🤝 Abby e Lev</h3>
+                <p>
+                    Enquanto Ellie caça Abby em Seattle, Abby desenvolve uma conexão com Lev e Yara, dois Seraphites que fugiram de sua comunidade. Abby se torna protetora dos irmãos, mostrando um lado mais humano e redentor.
+                </p>
+                <p>
+                    Yara morre durante uma operação para salvar Lev, e Abby promete protegê-lo. Esta relação espelha a relação de Joel e Ellie no primeiro jogo, mostrando como a esperança pode renascer mesmo nos momentos mais sombrios.
+                </p>
+            </div>
+
+            <div class="story-section">
+                <h3>💔 O Confronto Final</h3>
+                <p>
+                    Ellie e Abby eventualmente se enfrentam. Em uma cena brutal, Ellie quase mata Dina para chegar até Abby, mas a impede no último momento. Abby escapa com Lev em um barco.
+                </p>
+                <p>
+                    Meses depois, Ellie encontra Abby em uma plataforma de barcos na Califórnia. As duas lutam, e Ellie quase mata Abby, mas se lembra de Joel e de suas últimas palavras. Ela solta Abby, escolhendo superar o ciclo de violência.
+                </p>
+
+                <div class="info-box">
+                    <h4>🎸 O Final</h4>
+                    <p>Ellie volta para a fazenda onde Dina e JJ (seu bebê) estavam esperando. Porém, Dina já foi embora, incapaz de lidar com a obsessão de Ellie pela vingança. Ellie encontra o violão de Joel e toca a música que ele estava ensinando, mas com apenas três dedos, não consegue. A cena final mostra Ellie caminhando para um futuro incerto, mas com a possibilidade de redenção.</p>
+                </div>
+            </div>
+
+            <div class="story-section">
+                <h3>🎭 Temas Centrais</h3>
+                <ul>
+                    <li><strong>Ciclo da Violência:</strong> A vingança gera mais vingança, destruindo todos ao redor</li>
+                    <li><strong>Perda e Luto:</strong> Como diferentes personagens processam o luto de formas variadas</li>
+                    <li><strong>Empatia:</strong> A importância de entender o lado do "inimigo"</li>
+                    <li><strong>Redenção:</strong> É possível mudar, mesmo após atos terríveis?</li>
+                    <li><strong>Amor e Conexão:</strong> As relações humanas são o que nos mantêm vivos</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 The Last of Us Fan Site</p>
+        </div>
+    </footer>
+</body>
+</html>
